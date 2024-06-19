@@ -1,0 +1,15 @@
+<!-- audits/templates/audits/user_audit_list.html -->
+{% extends "base.html" %}
+
+{% block title %}My Audits{% endblock %}
+
+{% block content %}
+  <h2>My Audits</h2>
+  <ul>
+    {% for audit in audits %}
+      <li>
+        <a href="{% url 'submit_response' audit.id %}">{{ audit.title }}</a> - Due: {{ audit.next_due_date }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

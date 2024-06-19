@@ -1,0 +1,24 @@
+<!-- audits/templates/audits/view_responses.html -->
+{% extends "base.html" %}
+
+{% block title %}Responses for {{ audit.title }}{% endblock %}
+
+{% block content %}
+  <h2>Responses for {{ audit.title }}</h2>
+  <ul>
+    {% for response in responses %}
+      <li>
+        <strong>Question:</strong> {{ response.question.task_description }}<br>
+        <strong>Why:</strong> {{ response.question.why }}<br>
+        <strong>Expected Result:</strong> {{ response.question.expected_result }}<br>
+        <strong>User:</strong> {{ response.user.username }}<br>
+        <strong>Response:</strong> {{ response.response_text }}<br>
+        {% if response.response_image %}
+          <strong>Image:</strong><br>
+          <img src="{{ response.response_image.url }}" alt="Response Image" style="max-width: 200px;"><br>
+        {% endif %}
+        <strong>Submitted on:</strong> {{ response.created_at }}<br>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block title %}Add Questions{% endblock %}
+
+{% block content %}
+  <h2>Add Questions to {{ audit.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="task_name">Task Description</label>
+      {{ form.task_description }}
+    </div>
+    <div class="form-group">
+      <label for="why">Why</label>
+      {{ form.why }}
+    </div>
+    <div class="form-group">
+      <label for="expected_result">Expected Result</label>
+      {{ form.expected_result }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add Question</button>
+  </form>
+  <h3>Current Questions</h3>
+  <ul>
+    {% for question in questions %}
+      <li>
+        <strong>Task:</strong> {{ question.task_description }}<br>
+        <strong>Why:</strong> {{ question.why }}<br>
+        <strong>Expected Result:</strong> {{ question.expected_result }}
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'audit_list' %}" class="btn btn-secondary">Done</a>
+{% endblock %}

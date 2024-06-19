@@ -1,0 +1,23 @@
+<!-- audits/templates/audits/submit_response.html -->
+{% extends "base.html" %}
+
+{% block title %}Submit Response{% endblock %}
+
+{% block content %}
+  <h2>Submit Response to {{ audit.title }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for question in questions %}
+      <div class="form-group">
+        <h4>Task: {{ question.task_description }}</h4>
+        <p><strong>Why:</strong> {{ question.why }}</p>
+        <p><strong>Expected Result:</strong> {{ question.expected_result }}</p>
+        <label for="response_text_{{ question.id }}">Your Response:</label>
+        <textarea class="form-control" name="response_text_{{ question.id }}" required></textarea>
+        <label for="response_image_{{ question.id }}">Attach Image (optional):</label>
+        <input type="file" class="form-control-file" name="response_image_{{ question.id }}">
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

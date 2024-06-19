@@ -1,0 +1,20 @@
+<!-- audits/templates/audits/audit_list.html -->
+{% extends "base.html" %}
+
+{% block title %}Audit List{% endblock %}
+
+{% block content %}
+  <h2>Audit List</h2>
+  <ul>
+    {% for audit in audits %}
+      <li>
+        {{ audit.title }} - Due: {{ audit.next_due_date }}
+        {% if audit.assigned_user %}
+          (Assigned to {{ audit.assigned_user.username }})
+        {% else %}
+          <a href="{% url 'assign_audit' audit.id %}">Assign to User</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

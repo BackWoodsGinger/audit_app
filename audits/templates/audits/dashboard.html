@@ -1,0 +1,23 @@
+<!-- audits/templates/audits/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <h2>Dashboard</h2>
+  <h3>Audits</h3>
+  <ul>
+    {% for audit in audits %}
+      <li>
+        <strong>{{ audit.title }}</strong>
+        <ul>
+          {% if audit.id in responses_by_audit %}
+            <li><a href="{% url 'view_responses' audit.id %}">View Responses</a></li>
+          {% else %}
+            <li>No responses yet</li>
+          {% endif %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
