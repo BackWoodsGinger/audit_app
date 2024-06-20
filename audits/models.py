@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 
 class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -29,7 +30,17 @@ class Audit(models.Model):
         if not self.next_due_date:
             self.next_due_date = timezone.now()
         super().save(*args, **kwargs)
-    
+
+    def calculate_next_due_date(self):
+        if self.frequency == 'D':
+            return self.next_due_date + timedelta(days=1)
+        elif self.frequency == 'W':
+            return self.next_due_date + timedelta(weeks=1)
+        elif self.frequency == 'M':
+            return self.next_due_date + timedelta(days=30)  # Simplified, adjust as needed
+        elif self.frequency == 'Y':
+            return self.next_due_date + timedelta(days=365)  # Simplified, adjust as needed
+
     def __str__(self):
         return self.title
 
