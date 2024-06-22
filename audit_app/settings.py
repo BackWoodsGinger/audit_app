@@ -133,14 +133,13 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# project/settings.py
-CELERY_BROKER_URL = 'django-db'
+CELERY_BROKER_URL = 'redis://default:fRD2qPnZDQyQ4DnwXCnunVUVcydS5xrs@redis-18260.c329.us-east4-1.gce.redns.redis-cloud.com:18260'
 CELERY_RESULT_BACKEND = 'django-db'
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+CELERY_TIMEZONE = 'America/New_York'
 
 # Celery beat settings
 INSTALLED_APPS += ['django_celery_beat', 'django_celery_results']

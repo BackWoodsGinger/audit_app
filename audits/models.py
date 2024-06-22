@@ -25,6 +25,7 @@ class Audit(models.Model):
     frequency = models.CharField(max_length=1, choices=FREQUENCY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     next_due_date = models.DateTimeField()
+    completed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.next_due_date:

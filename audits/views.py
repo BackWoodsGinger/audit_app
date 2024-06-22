@@ -31,7 +31,7 @@ def dashboard(request):
         }
         return render(request, 'audits/dashboard.html', context)
     else:
-        return redirect('user_audit_list')
+        return redirect('useraudit_list')
     
 @login_required
 def view_responses(request, audit_id):
@@ -125,6 +125,8 @@ def submit_response(request, audit_id):
                 response_text=response_text,
                 response_image=response_image
             )
+        audit.completed = True
+        audit.save()
         return redirect('audit_list')
     return render(request, 'audits/submit_response.html', {'audit': audit, 'questions': questions})
 
